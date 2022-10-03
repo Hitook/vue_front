@@ -36,12 +36,7 @@
 
           <div class="navbar-item">
             <div class="buttons">
-              <router-link to="/log-in" class="button is-light">Log in</router-link>
-
-              <router-link to="/cart" class="button is-success">
-                <span class="icon"><i class="fas fa-shopping-cart"></i></span>
-                <span>Cart ({{ cartTotalLength }})</span>
-              </router-link>
+              <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
             </div>
           </div>
         </div>
@@ -63,6 +58,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
   export default{
     data() {
       return {
@@ -74,6 +71,13 @@
     },
     beforeCreate() {
       this.$store.commit('initializeStore')
+      const token = this.$store.state.token
+
+      if (token) {
+        axios.defaults.headers.common['Authorization'] = "Token " + token
+      } else {
+        axios.defaults.headers.common['Authorization'] = ""
+      }
     },
     mounted() {
       this.cart = this.$store.state.cart
@@ -86,6 +90,16 @@
           totalLength += this.cart.items[i].quantity
         }
         return totalLength
+      },
+      isLoggedIn() {
+        const token = this.$store.state.token
+        if(token) {
+          console.log('false')
+          return false
+        } else {
+          return true
+        }
+
       }
     }
   }

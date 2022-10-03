@@ -29,6 +29,8 @@
               <button class="button is-dark">Log in</button>
             </div>
           </div>
+          <hr>
+          Or <router-link to="/sign-up">click here</router-link> to Sign up
         </form>
       </div>
     </div>
@@ -54,7 +56,7 @@
     methods: {
       async submitForm() {
 
-        axios.defaults.headers.common['Athorization'] = ""
+        axios.defaults.headers.common['Authorization'] = ""
         localStorage.removeItem("token")
 
         this.errors = []
@@ -79,9 +81,9 @@
               const token = response.data.auth_token
 
               this.$store.commit('setToken', token)
-              axios.defaults.headers.common["Athorization"] = "Token " + token
+              axios.defaults.headers.common["Authorization"] = "Token " + token
               localStorage.setItem("token", token)
-              const toPath = this.$route.query.to || '/cart'
+              const toPath = this.$route.query.to || '/my-account'
 
               this.$router.push(toPath)
             })

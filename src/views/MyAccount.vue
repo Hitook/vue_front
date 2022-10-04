@@ -12,7 +12,7 @@
             <hr>
 
             <div class="column is-12">
-                <h2 class="subtitle">My Favorites</h2>
+                <h2 class="subtitle">My Favorite Trvias</h2>
 
                 <!-- <OrderSummary
                     v-for="order in orders"

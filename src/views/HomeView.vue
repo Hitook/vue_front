@@ -16,10 +16,10 @@
         <h2 class="is-size-2 has-text-centered">Latest Trivias</h2>
       </div>
 
-      <ProductBox 
-        v-for="product in latestProducts"
-        v-bind:key="product.id"
-        v-bind:product="product"
+      <TriviaBox 
+        v-for="trivia in latestTrivias"
+        v-bind:key="trivia.id"
+        v-bind:trivia="trivia"
         />
     
     </div>
@@ -31,27 +31,27 @@
 // import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 
-import ProductBox from '@/components/ProductBox'
+import TriviaBox from '@/components/TriviaBox'
 export default {
   name: 'HomeView',
   data() {
     return {
-      latestProducts: []
+      latestTrivias: []
     }
   },
   components: {
-    ProductBox
+    TriviaBox
   },
   mounted() {
-    this.getLatestProducts()
+    this.getLatestTrivias()
     document.title = 'Home | Trivia'
   },
   methods: {
-    getLatestProducts() {
+    getLatestTrivias() {
       axios
-        .get('/api/v1/latest-products/')
+        .get('/api/v1/latest-trivias/')
         .then(response => {
-          this.latestProducts = response.data
+          this.latestTrivias = response.data
         })
         .catch(error => {
           console.log(error)

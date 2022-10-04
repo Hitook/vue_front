@@ -35,8 +35,9 @@
           <router-link to="/computer_science" class="navbar-item">Computer Science</router-link>
 
           <div class="navbar-item">
-            <div class="buttons">
+            <div class="account-related">
               <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
+              <router-link to="/my-account" class="button is-primary" v-show="!LoggedIn">My Account</router-link>
             </div>
           </div>
         </div>

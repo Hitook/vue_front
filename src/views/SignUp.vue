@@ -27,7 +27,7 @@
           </div>
 
           <div class="notification is-danger" v-if="errors.length">
-            <p v-for="error in erorrs" v-bind:key="error"> {{ errror }}</p>
+            <p v-for="error in errors" v-bind:key="error"> {{ error }}</p>
 
           </div>
 
@@ -64,15 +64,15 @@
         this.errors = []
 
         if (this.username === '') {
-          this.erorrs.push('The username is missing')
+          this.errors.push('The username is missing')
         }
 
         if (this.password === '') {
-          this.erorrs.push('The password is too short')
+          this.errors.push('The password is too short')
         }
 
         if(this.password !== this.password2) {
-          this.erorrs.push('The passwords do not match')
+          this.errors.push('The passwords do not match')
         }
 
         if (!this.errors.length) {
@@ -82,7 +82,7 @@
           }
 
           axios 
-            .post("/api/vi/users/", formData)
+            .post("/api/v1/users/", formData)
             .then( response => {
               toast({
                 message: 'Account created, please log in',

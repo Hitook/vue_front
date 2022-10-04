@@ -1,10 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Product from '../views/Product.vue'
+import Trivia from '../views/Trivia.vue'
 import Category from '../views/Category.vue'
 import Search from '../views/Search.vue'
 import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
+
+import MyAccount from '../views/MyAccount.vue'
+
 
 const routes = [
   {
@@ -36,14 +39,20 @@ const routes = [
     component: LogIn
   },
   {
-    path: '/:category_slug/:product_slug/',
-    name: 'Product',
-    component: Product
+    path: '/my-account',
+    name: 'my-account',
+    component: MyAccount
+
   },
   {
     path: '/:category_slug',
     name: 'Category',
     component: Category
+  },
+  {
+    path: '/:trivia_slug',
+    name: 'Trivia',
+    component: Trivia
   }
 ]
 

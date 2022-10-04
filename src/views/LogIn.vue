@@ -20,7 +20,7 @@
           </div>
 
           <div class="notification is-danger" v-if="errors.length">
-            <p v-for="error in erorrs" v-bind:key="error"> {{ errror }}</p>
+            <p v-for="error in errors" v-bind:key="error"> {{ error }}</p>
 
           </div>
 
@@ -29,6 +29,8 @@
               <button class="button is-dark">Log in</button>
             </div>
           </div>
+          <hr>
+          Or <router-link to="/sign-up">click here</router-link> to Sign up
         </form>
       </div>
     </div>
@@ -54,17 +56,17 @@
     methods: {
       async submitForm() {
 
-        axios.defaults.headers.common['Athorization'] = ""
+        axios.defaults.headers.common['Authorization'] = ""
         localStorage.removeItem("token")
 
         this.errors = []
 
         if (this.username === '') {
-          this.erorrs.push('The username is missing')
+          this.errors.push('The username is missing')
         }
 
         if (this.password === '') {
-          this.erorrs.push('The password is too short')
+          this.errors.push('The password is missing')
         }
 
         if (!this.errors.length) {
@@ -74,14 +76,14 @@
           }
 
           await axios 
-            .post("/api/vi/token/login/", formData)
+            .post("/api/v1/token/login/", formData)
             .then( response => {
               const token = response.data.auth_token
 
               this.$store.commit('setToken', token)
-              axios.defaults.headers.common["Athorization"] = "Token " + token
+              axios.defaults.headers.common["Authorization"] = "Token " + token
               localStorage.setItem("token", token)
-              const toPath = this.$route.query.to || '/cart'
+              const toPath = this.$route.query.to || '/my-account'
 
               this.$router.push(toPath)
             })

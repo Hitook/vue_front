@@ -2,29 +2,10 @@
   <div class="page-trivia">
     <div class="columns is-multiline">
       <div class="column is-9">
-        <figure class="image mb-6">
-          <img v-bind:src="trivia.get_image">
-        </figure>
 
         <h1 class="title">{{ trivia.name }}</h1>
         <p>{{ trivia.description}}</p>
       </div>
-    </div>
-
-    <div class="column is-3">
-      <h2 class="subtitle">Information</h2>
-      <p><strong>Price:</strong>${{ trivia.price}}</p>
-
-      <div class="field has-addons mt-6">
-        <div class="control">
-          <input type="number" class="input" min="1" v-model="quantity">
-        </div>
-
-        <div class="control">
-          <a class="button is-dark" @click="addToCart">Add to cart</a>
-        </div>
-      </div>
-
     </div>
   </div>
 </template>
@@ -61,24 +42,6 @@
           })
         this.$store.commit('setIsLoading', false)
       },
-      addToCart() {
-        if (isNaN(this.quantity) || this.quantity < 1) {
-          this.quantity = 1
-        }
-        const item = {
-          trivia: this.trivia,
-          quantity: this.quantity
-        }
-        this.$store.commit('addToCart', item)
-        toast({
-          message: 'The trivia was added to the cart',
-          type: 'is-success',
-          dismissible: true,
-          pauseOnHover: true,
-          duration: 2000,
-          position: 'bottom-right',
-        })
-      }
     },
   }
 </script>

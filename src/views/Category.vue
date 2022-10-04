@@ -4,10 +4,10 @@
       <div class="column is-12">
         <h2 class="is-size-2 has-text-centered"> {{ category.name }}</h2>
       </div>
-      <ProductBox 
-        v-for="product in category.products"
-        v-bind:key="product.id"
-        v-bind:product="product"
+      <TriviaBox 
+        v-for="trivia in category.trivias"
+        v-bind:key="trivia.id"
+        v-bind:trivia="trivia"
         />
     </div>
   </div>
@@ -16,17 +16,17 @@
 <script>
   import axios from 'axios'
   import { toast } from 'bulma-toast'
-  import ProductBox from '@/components/ProductBox'
+  import TriviaBox from '@/components/TriviaBox'
 
   export default {
     name: 'Category',
     components: {
-      ProductBox
+      TriviaBox
     },
     data() {
       return {
         category: {
-          products: []
+          trivias: []
         }
       }
     },
@@ -47,7 +47,7 @@
         this.$store.commit('setIsLoading', true)
 
         axios
-          .get(`api/v1/products/${categorySlug}`)
+          .get(`api/v1/trivias/${categorySlug}`)
           .then(response => {
             this.category = response.data
 

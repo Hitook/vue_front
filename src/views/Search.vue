@@ -5,10 +5,10 @@
         <h1 class="title">Search</h1>
         <h2 class="is-size-5 has-text-grey">Search term: "{{query}}"</h2>
       </div>
-      <ProductBox 
-        v-for="product in  products"
-        v-bind:key="product.id"
-        v-bind:product="product"
+      <TriviaBox 
+        v-for="trivia in  trivias"
+        v-bind:key="trivia.id"
+        v-bind:trivia="trivia"
         />
     </div>
   </div>
@@ -16,17 +16,17 @@
 
 <script>
   import axios from "axios"
-  import ProductBox from "@/components/ProductBox.vue";
+  import TriviaBox from "@/components/TriviaBox.vue";
 
   export default {
     name:'Search',
     components: {
-    ProductBox,
-    ProductBox
+    TriviaBox,
+    TriviaBox
 },
     data() {
       return {
-        products:[],
+        trivias:[],
         query:''
       }
     },
@@ -47,9 +47,9 @@
         this.$store.commit('setIsLoading', true)
 
         await axios
-          .post(`api/v1/products/search/`, {'query': this.query})
+          .post(`api/v1/trivias/search/`, {'query': this.query})
           .then(response => {
-            this.products = response.data
+            this.trivias = response.data
           })
           .catch(error => {
             console.log(error)

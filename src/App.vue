@@ -31,11 +31,10 @@
           </div>
         </div>
         <div class="navbar-end">
-          <router-link to="/history" class="navbar-item">History</router-link>
-          <router-link to="/computer_science" class="navbar-item">Computer Science</router-link>
-
+          <router-link to="/categories" class="navbar-item">Categories</router-link>
           <div class="navbar-item">
             <div class="account-related">
+              <router-link to="/create-trivia" class="button is-light space">Create Trivia</router-link>
               <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
               <router-link to="/my-account" class="button is-primary" v-show="!LoggedIn">My Account</router-link>
             </div>
@@ -84,14 +83,6 @@ import axios from 'axios'
       this.cart = this.$store.state.cart
     },
     computed: {
-      cartTotalLength() {
-        let totalLength = 0
-
-        for (let i = 0; i < this.cart.items.length; i++) {
-          totalLength += this.cart.items[i].quantity
-        }
-        return totalLength
-      },
       isLoggedIn() {
         const token = this.$store.state.token
         if(token) {
@@ -145,5 +136,9 @@ import axios from 'axios'
   &.is-loading{
     height: 80px;
   }
+}
+
+.space {
+  margin-right: 10px;
 }
 </style>

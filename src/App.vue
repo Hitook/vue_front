@@ -31,13 +31,17 @@
           </div>
         </div>
         <div class="navbar-end">
-          <router-link to="/history" class="navbar-item">History</router-link>
-          <router-link to="/computer_science" class="navbar-item">Computer Science</router-link>
-
+          <router-link to="/categories" class="navbar-item">Categories</router-link>
+          <router-link to="/about" class="navbar-item">About Us</router-link>
           <div class="navbar-item">
             <div class="account-related">
-              <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
-              <router-link to="/my-account" class="button is-primary" v-show="!LoggedIn">My Account</router-link>
+              <template v-if="$store.state.isAuthenticated">
+                <router-link to="/my-account" class="button is-success">My account</router-link>
+              </template>
+
+              <template v-else>
+                <router-link to="/log-in" class="button is-light">Log in</router-link>
+              </template>
             </div>
           </div>
         </div>
@@ -84,14 +88,6 @@ import axios from 'axios'
       this.cart = this.$store.state.cart
     },
     computed: {
-      cartTotalLength() {
-        let totalLength = 0
-
-        for (let i = 0; i < this.cart.items.length; i++) {
-          totalLength += this.cart.items[i].quantity
-        }
-        return totalLength
-      },
       isLoggedIn() {
         const token = this.$store.state.token
         if(token) {
@@ -145,5 +141,9 @@ import axios from 'axios'
   &.is-loading{
     height: 80px;
   }
+}
+
+.space {
+  margin-right: 10px;
 }
 </style>

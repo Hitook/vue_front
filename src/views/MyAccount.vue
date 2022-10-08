@@ -12,12 +12,13 @@
             <hr>
 
             <div class="column is-12">
-                <h2 class="subtitle">My Favorite Trvias</h2>
+                <h2 class="subtitle">My Favorite Trivias</h2>
 
-                <!-- <OrderSummary
-                    v-for="order in orders"
-                    v-bind:key="order.id"
-                    v-bind:order="order" /> -->
+               <TriviaBox
+                    v-for="trivia in this.trivias"
+                    v-bind:key="trivia.id"
+                    v-bind:trivia="trivia" />
+                   
             </div>
         </div>
     </div>
@@ -26,22 +27,22 @@
 <script>
 import axios from 'axios'
 
-//import OrderSummary from '@/components/OrderSummary.vue'
+import TriviaBox from '@/components/TriviaBox.vue'
 
 export default {
     name: 'MyAccount',
-    // components: {
-    //     OrderSummary
-    // },
+    components: {
+        TriviaBox
+},
     data() {
         return {
-            orders: []
+            trivias: []
         }
     },
     mounted() {
         document.title = 'My account | Trivia'
 
-        //this.getMyOrders()
+        this.getFavoriteTrivia()
     },
     methods: {
         logout() {
@@ -55,17 +56,18 @@ export default {
 
             this.$router.push('/')
         },
-        async getMyOrders() {
+        async getFavoriteTrivia() {
             this.$store.commit('setIsLoading', true)
 
-            // await axios
-                // .get('/api/v1/orders/')
-                // .then(response => {
-                //     this.orders = response.data
-                // })
-                // .catch(error => {
-                //     console.log(error)
-                // })
+            await axios
+                .get('/api/v1/latest-trivias/')
+                .then(response => {
+                    this.trivias = response.data
+                    console.log(this.trivias[0].id)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
 
             this.$store.commit('setIsLoading', false)
         }

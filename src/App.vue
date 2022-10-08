@@ -32,11 +32,16 @@
         </div>
         <div class="navbar-end">
           <router-link to="/categories" class="navbar-item">Categories</router-link>
+          <router-link to="/about" class="navbar-item">About Us</router-link>
           <div class="navbar-item">
             <div class="account-related">
-              <router-link to="/create-trivia" class="button is-light space">Create Trivia</router-link>
-              <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
-              <router-link to="/my-account" class="button is-primary" v-show="!LoggedIn">My Account</router-link>
+              <template v-if="$store.state.isAuthenticated">
+                <router-link to="/my-account" class="button is-success">My account</router-link>
+              </template>
+
+              <template v-else>
+                <router-link to="/log-in" class="button is-light">Log in</router-link>
+              </template>
             </div>
           </div>
         </div>

@@ -44,7 +44,7 @@
         this.$store.commit('setIsLoading', true)
 
         axios
-          .get(`api/v1/trivias/latest-categories/`)
+          .get(`api/v1/trivias/display-categories/`)
           .then(response => {
             this.categories = response.data
             document.title = 'Categories | Trivia'

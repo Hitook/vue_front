@@ -62,7 +62,7 @@ const routes = [
     component: Category
   },
   {
-    path: '/:trivia_slug',
+    path: '/:category_slug/:trivia_slug',
     name: 'Trivia',
     component: Trivia
   }

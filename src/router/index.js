@@ -2,11 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Trivia from '../views/Trivia.vue'
 import Category from '../views/Category.vue'
+import Categories from '../views/Categories.vue'
 import Search from '../views/Search.vue'
 import SignUp from '../views/SignUp.vue'
-import LogIn from '../views/LogIn.vue'
-
+import SignIn from '../views/SignIn.vue'
+import SignOut from '../views/SignOut'
 import MyAccount from '../views/MyAccount.vue'
+import CreateTrivia from '../views/CreateTrivia.vue'
 
 
 const routes = [
@@ -29,14 +31,24 @@ const routes = [
     component: Search
   },
   {
+    path: '/create-trivia',
+    name: 'create-trivia',
+    component: CreateTrivia
+  },
+  {
     path: '/sign-up',
     name: 'sign-up',
     component: SignUp
   },
   {
-    path: '/log-in',
-    name: 'log-in',
-    component: LogIn
+    path: '/sign-in',
+    name: 'sign-in',
+    component: SignIn
+  },
+  {
+    path: '/sign-out',
+    name: 'sign-out',
+    component: SignOut
   },
   {
     path: '/my-account',
@@ -45,12 +57,17 @@ const routes = [
 
   },
   {
+    path: '/categories',
+    name: 'Categories',
+    component: Categories
+  },
+  {
     path: '/:category_slug',
     name: 'Category',
     component: Category
   },
   {
-    path: '/:trivia_slug',
+    path: '/:category_slug/:trivia_slug',
     name: 'Trivia',
     component: Trivia
   }

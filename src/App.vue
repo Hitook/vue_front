@@ -1,9 +1,10 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar is-dark">
+    <nav class="navbar is-dark p-1">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item"><strong>Trivia</strong></router-link>
-        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu" @click="showMobileMenu = !showMobileMenu">
+        <router-link to="/" class="navbar-item has-text-weight-bold is-size-4">Trivia Home</router-link>
+        <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu"
+          @click="showMobileMenu = !showMobileMenu">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -11,46 +12,38 @@
       </div>
       <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
         <div class="navbar-start">
-          <div class="navbar-item">
-            <form method="get" action="/search">
-              <div class="field has-addons">
-                <div class="control">
-                  <input type="text" class="input" placeholder="Search a category" name="query">
-                </div>
-                <div class="control">
-                  <button class="button is-success">
-                    <span class="icon">
-                      <i class="fas fa-search"></i>
-                    </span>
-                  </button>
+          <router-link to="/categories" class="navbar-item">Categories</router-link>
+          <router-link to="/about" class="navbar-item">About Us</router-link>
+          <div class="navbar-item ">
 
-                </div>
-              </div>
-            </form>
 
           </div>
         </div>
         <div class="navbar-end">
-          <router-link to="/history" class="navbar-item">History</router-link>
-          <router-link to="/computer_science" class="navbar-item">Computer Science</router-link>
-
           <div class="navbar-item">
             <div class="account-related">
-              <router-link to="/log-in" class="button is-light" v-show="LoggedIn">Log in</router-link>
-              <router-link to="/my-account" class="button is-primary" v-show="!LoggedIn">My Account</router-link>
+              <template v-if="$store.state.isAuthenticated">
+                <router-link to="/my-account" class="button is-success">My account</router-link>
+                <router-link to="/sign-out" class="button is-success">Sign out</router-link>
+              </template>
+
+              <template v-else>
+                <router-link to="/sign-in" class="button is-dark is-rounded mx-1"><b>Sign In</b></router-link>
+                <router-link to="/sign-up" class="button is-light is-rounded mx-1"><b>Sign Up</b></router-link>
+              </template>
             </div>
           </div>
         </div>
       </div>
     </nav>
-    
+
     <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading }">
       <div class="lds-dual-ring"></div>
     </div>
 
-    <section class="section">
-      <router-view/>
-    </section>
+    <body>
+      <router-view />
+    </body>
 
     <footer class="footer">
       <p class="has-text-centered">Copyright (c) 2022</p>
@@ -58,53 +51,47 @@
 
   </div>
 </template>
+
 <script>
 import axios from 'axios'
 
-  export default{
-    data() {
-      return {
-        showMobileMenu: false,
-        cart: {
-          items: []
-        }
-      }
-    },
-    beforeCreate() {
-      this.$store.commit('initializeStore')
-      const token = this.$store.state.token
-
-      if (token) {
-        axios.defaults.headers.common['Authorization'] = "Token " + token
-      } else {
-        axios.defaults.headers.common['Authorization'] = ""
-      }
-    },
-    mounted() {
-      this.cart = this.$store.state.cart
-    },
-    computed: {
-      cartTotalLength() {
-        let totalLength = 0
-
-        for (let i = 0; i < this.cart.items.length; i++) {
-          totalLength += this.cart.items[i].quantity
-        }
-        return totalLength
-      },
-      isLoggedIn() {
-        const token = this.$store.state.token
-        if(token) {
-          console.log('false')
-          return false
-        } else {
-          return true
-        }
-
+export default {
+  data() {
+    return {
+      showMobileMenu: false,
+      cart: {
+        items: []
       }
     }
+  },
+  beforeCreate() {
+    this.$store.commit('initializeStore')
+    const token = this.$store.state.token
+
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = "Token " + token
+    } else {
+      axios.defaults.headers.common['Authorization'] = ""
+    }
+  },
+  mounted() {
+    this.cart = this.$store.state.cart
+  },
+  computed: {
+    isSignedIn() {
+      const token = this.$store.state.token
+      if (token) {
+        console.log('false')
+        return false
+      } else {
+        return true
+      }
+
+    }
   }
+}
 </script>
+
 <style lang="scss">
 @import '../node_modules/bulma';
 
@@ -114,7 +101,7 @@ import axios from 'axios'
   height: 80px;
 }
 
-.lds-dual-ring::after{
+.lds-dual-ring::after {
   content: "";
   display: block;
   width: 64px;
@@ -130,6 +117,7 @@ import axios from 'axios'
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -142,8 +130,12 @@ import axios from 'axios'
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
 
-  &.is-loading{
+  &.is-loading {
     height: 80px;
   }
+}
+
+.space {
+  margin-right: 10px;
 }
 </style>

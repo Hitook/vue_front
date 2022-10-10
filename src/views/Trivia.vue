@@ -45,22 +45,18 @@
         const form = e.target
         const formData = new FormData(form)
         for (const [inputName, value] of formData) {
-          console.log({ inputName, value })
           this.checkAnswer(inputName, value)
-          console.log('Hit')
         }
       },
       async checkAnswer(inputName, value) {
         this.$store.commit('setIsLoading', true)
         const question_id = inputName
-        const category_slug = this.$route.params.category_slug
         const trivia_slug  = this.$route.params.trivia_slug
 
         await axios
         .get(`api/v1/${trivia_slug}/questions`)
         .then(response => {
           this.trivia = response.data
-          console.log(this.trivia)
           for (let i = 0; i < this.trivia.length; i++) {
             if (this.trivia[i]['id'] == question_id) {
               if (value === this.trivia[i]['correct_answer']) {

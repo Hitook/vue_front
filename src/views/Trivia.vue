@@ -1,7 +1,7 @@
 <template>
   <div class="page-trivia">
     <div class="columns is-multiline">
-      <div class="column is-9">
+      <div class="column is-9"  v-if="questions.length >0">
         <h1 class="title">{{ trivia.name }}</h1>
         <p>{{ trivia.description}}</p>
   
@@ -12,8 +12,12 @@
             v-bind:question="question"
           />
           <button class="button is-primary" type="submit">Submit</button>
+          <div> {{total}}</div>
         </form>
-        <div> {{total}}</div>
+      </div>
+      <div v-if="questions.length <=0" class="title">
+        <h1>{{trivia.name}} currently has no questions</h1>
+        <h3 class="title is-5">Please come back later</h3>
       </div>
     </div>
   </div>

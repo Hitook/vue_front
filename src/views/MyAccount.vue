@@ -6,7 +6,7 @@
             </div>
 
             <div class="column is-12">
-                <button @click="logout()" class="button is-danger">Log out</button>
+                <button @click="signout()" class="button is-danger">Sign out</button>
             </div>
 
             <hr>
@@ -18,11 +18,8 @@
             <div class="column is-12">
                 <h2 class="subtitle">My Favorite Trivias</h2>
 
-               <TriviaBox
-                    v-for="trivia in this.trivias"
-                    v-bind:key="trivia.id"
-                    v-bind:trivia="trivia" />
-                   
+                <TriviaBox v-for="trivia in this.trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
+
             </div>
         </div>
     </div>
@@ -37,7 +34,7 @@ export default {
     name: 'MyAccount',
     components: {
         TriviaBox
-},
+    },
     data() {
         return {
             trivias: []
@@ -49,7 +46,7 @@ export default {
         this.getFavoriteTrivia()
     },
     methods: {
-        logout() {
+        signout() {
             axios.defaults.headers.common["Authorization"] = ""
 
             localStorage.removeItem("token")

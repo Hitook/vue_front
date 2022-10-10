@@ -5,8 +5,8 @@ import Category from '../views/Category.vue'
 import Categories from '../views/Categories.vue'
 import Search from '../views/Search.vue'
 import SignUp from '../views/SignUp.vue'
-import LogIn from '../views/LogIn.vue'
-
+import SignIn from '../views/SignIn.vue'
+import SignOut from '../views/SignOut'
 import MyAccount from '../views/MyAccount.vue'
 import CreateTrivia from '../views/CreateTrivia.vue'
 import Question from '../views/Question.vue'
@@ -41,9 +41,14 @@ const routes = [
     component: SignUp
   },
   {
-    path: '/log-in',
-    name: 'log-in',
-    component: LogIn
+    path: '/sign-in',
+    name: 'sign-in',
+    component: SignIn
+  },
+  {
+    path: '/sign-out',
+    name: 'sign-out',
+    component: SignOut
   },
   {
     path: '/my-account',

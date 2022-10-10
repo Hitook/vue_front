@@ -1,8 +1,8 @@
 <template>
   <div class="page-sign-up">
-    <div class="coulmns">
+    <div class="columns">
       <div class="column is-4 is-offset-4">
-        <h1 class="title">Sign up</h1>
+        <h1 class="title">Sign In</h1>
 
         <form @submit.prevent="submitForm">
           <div class="field">
@@ -19,13 +19,6 @@
             </div>
           </div>
 
-          <div class="field">
-            <label> Repeat Password</label>
-            <div class="control">
-              <input type="password" class="input" v-model="password2">
-            </div>
-          </div>
-
           <div class="notification is-danger" v-if="errors.length">
             <p v-for="error in errors" v-bind:key="error"> {{ error }}</p>
 
@@ -33,12 +26,11 @@
 
           <div class="field">
             <div class="control">
-              <button class="button is-dark">Sign up</button>
+              <button class="button is-dark">Sign in</button>
             </div>
           </div>
           <hr>
-
-          Or <router-link to="/sign-in">click here</router-link> to sign in
+          Or <router-link to="/sign-up">click here</router-link> to Sign up
         </form>
       </div>
     </div>
@@ -50,17 +42,23 @@ import axios from 'axios'
 import { toast } from 'bulma-toast'
 
 export default {
-  name: 'SignUp',
+  name: 'SignIn',
   data() {
     return {
       username: '',
       password: '',
-      password2: '',
       errors: []
     }
   },
+  mounted() {
+    document.title = 'Sign In | Trivia'
+  },
   methods: {
-    submitForm() {
+    async submitForm() {
+
+      axios.defaults.headers.common['Authorization'] = ""
+      localStorage.removeItem("token")
+
       this.errors = []
 
       if (this.username === '') {
@@ -68,11 +66,7 @@ export default {
       }
 
       if (this.password === '') {
-        this.errors.push('The password is too short')
-      }
-
-      if (this.password !== this.password2) {
-        this.errors.push('The passwords do not match')
+        this.errors.push('The password is missing')
       }
 
       if (!this.errors.length) {
@@ -81,19 +75,17 @@ export default {
           password: this.password
         }
 
-        axios
-          .post("/api/v1/users/", formData)
+        await axios
+          .post("/api/v1/token/signin/", formData)
           .then(response => {
-            toast({
-              message: 'Account created, please sign in',
-              type: 'is-success',
-              dismissable: true,
-              pauseOnHover: true,
-              duration: 2000,
-              position: 'bottom-right',
-            })
+            const token = response.data.auth_token
 
-            this.$router.push('/sign-in')
+            this.$store.commit('setToken', token)
+            axios.defaults.headers.common["Authorization"] = "Token " + token
+            localStorage.setItem("token", token)
+            const toPath = this.$route.query.to || '/my-account'
+
+            this.$router.push(toPath)
           })
           .catch(error => {
             if (error.repsonse) {

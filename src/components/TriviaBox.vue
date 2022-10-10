@@ -1,21 +1,25 @@
 <template>
-  <div class="column is-3">
-         <div class="box">
-           <h3 class="is-size-4">{{ trivia.name}} </h3>
-           <router-link v-bind:to="trivia.get_absolute_url" class="button is-dark mt-4"> Play {{ trivia.name}}</router-link>
-         </div>
-       </div>
- </template>
+  <article class="tile is-child is-2 p-5">
+    <figure class="image is-16by16">
+      <img class="is-rounded" src="../../public/quiz-banners/history-banner-medium.jpg">
+    </figure>
+    <p class="title is-4 has-text-centered">{{ trivia.name}}</p>
+    <router-link v-bind:to="trivia.get_absolute_url" class="button is-dark mt-4"> Play {{
+    trivia.name}}</router-link>
+  </article>
+</template>
  
- <script>
-   export default {
-     name: 'TriviaBox',
-     props: {
-       trivia: Object
-     }
-   }
- </script>
+
  
- <style scoped>
+<script>
+export default {
+  name: 'TriviaBox',
+  props: {
+    trivia: Object
+  }
+}
+</script>
  
- </style>
+<style scoped>
+
+</style>

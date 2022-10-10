@@ -1,8 +1,8 @@
 <template>
   <div id="wrapper">
-    <nav class="navbar is-dark">
+    <nav class="navbar is-dark p-1">
       <div class="navbar-brand">
-        <router-link to="/" class="navbar-item"><strong>Home</strong></router-link>
+        <router-link to="/" class="navbar-item has-text-weight-bold is-size-4">Trivia Home</router-link>
         <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu"
           @click="showMobileMenu = !showMobileMenu">
           <span aria-hidden="true"></span>
@@ -28,8 +28,8 @@
               </template>
 
               <template v-else>
-                <router-link to="/sign-in" class="button is-dark"><b>Sign In</b></router-link>
-                <router-link to="/sign-up" class="button is-light"><b>Sign Up</b></router-link>
+                <router-link to="/sign-in" class="button is-dark is-rounded mx-1"><b>Sign In</b></router-link>
+                <router-link to="/sign-up" class="button is-light is-rounded mx-1"><b>Sign Up</b></router-link>
               </template>
             </div>
           </div>

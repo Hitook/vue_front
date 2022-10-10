@@ -10,7 +10,11 @@
             </div>
 
             <hr>
-
+            <!-- Add check for if staff member -->
+            <a href="http://127.0.0.1:8000/admin/auth/user/" class="button">Admin Page</a>
+            <input type="text" class="input" placeholder="Change Username" >
+            <input type="text" class="input" placeholder="Change Password" > 
+            <hr>
             <div class="column is-12">
                 <h2 class="subtitle">My Favorite Trivias</h2>
 

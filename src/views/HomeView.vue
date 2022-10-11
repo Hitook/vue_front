@@ -10,13 +10,15 @@
             <h2 class="subtitle is-4 has-text-white">
               Search for trivia
             </h2>
-            <div class="field has-addons mx-6 px-6">
-              <input type="text" class="input is-rounded"
-                placeholder="Search a trivia category or description, for example 'History'" name="query">
-              <button class="button is-success is-rounded ml-2">
-                <span class="has-text-weight-bold">Search</span>
-              </button>
-            </div>
+            <form method="get" action="/search">
+              <div class="field has-addons mx-6 px-6">
+                <input type="text" class="input is-rounded"
+                  placeholder="Search a trivia category or description, for example 'History'" name="query">
+                <button class="button is-success is-rounded ml-2">
+                  <span class="has-text-weight-bold">Search</span>
+                </button>
+              </div>
+            </form>
           </div>
 
         </div>
@@ -62,7 +64,6 @@
         </div>
       </div>
 
-      <TriviaBox v-for="trivia in latestTrivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
 
     </div>
   </section>
@@ -70,62 +71,7 @@
   <section class="m-6 p-6">
     <h2 class="title is-2 has-text-centered">Popular Trivia</h2>
     <div class="tile is-ancestor m-6">
-      <div class="tile is-parent is-vertical m-6">
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/quiz-banners/history-banner-medium.jpg">
-          </figure>
-          <p class="title is-4 has-text-centered">Literature</p>
-        </article>
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/original_globe-light.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Geography</p>
-        </article>
-      </div>
-      <div class="tile is-vertical m-6">
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/adm3a.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Computer Science</p>
-        </article>
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/piano_keys.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Music</p>
-        </article>
-      </div>
-      <div class="tile is-vertical m-6">
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/bugatti_chiron_front_three_quarter.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Sports Cars</p>
-        </article>
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/barcelona.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Architecture</p>
-        </article>
-      </div>
-      <div class="tile is-vertical m-6">
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/darth-vader.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Star Wars</p>
-        </article>
-        <article class="tile is-child is-10 box">
-          <figure class="image is-16by16">
-            <img class="is-rounded" src="../../public/football.webp">
-          </figure>
-          <p class="title is-4 has-text-centered">Football</p>
-        </article>
-      </div>
+      <TriviaBox v-for="trivia in latestTrivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
     </div>
   </section>
 

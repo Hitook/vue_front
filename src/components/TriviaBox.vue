@@ -1,15 +1,13 @@
 <template>
-  <article class="tile is-child is-2 p-5">
-    <figure class="image is-16by16">
-      <img class="is-rounded" src="../../public/quiz-banners/history-banner-medium.jpg">
-    </figure>
-    <p class="title is-4 has-text-centered">{{ trivia.name}}</p>
-    <router-link v-bind:to="trivia.get_absolute_url" class="button is-dark mt-4"> Play {{
-    trivia.name}}</router-link>
-  </article>
+  <div class="tile is-parent">
+    <router-link v-bind:to="trivia.get_absolute_url" class="tile is-child is-10 box">
+      <figure class="image">
+        <img class="is-rounded" src="../../public/quiz-banners/art-banner-medium.jpg">
+      </figure>
+      <p class="title is-4 has-text-centered">{{ trivia.name}}</p>
+    </router-link>
+  </div>
 </template>
- 
-
  
 <script>
 export default {
@@ -18,6 +16,7 @@ export default {
     trivia: Object
   }
 }
+
 </script>
  
 <style scoped>

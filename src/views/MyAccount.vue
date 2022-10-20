@@ -15,8 +15,8 @@
             <input type="text" class="input" placeholder="Change Username" >
             <input type="text" class="input" placeholder="Change Password" > 
             <hr>
-            <div class="column is-12">
-                <h2 class="subtitle">My Favorite Trivias</h2>
+            <h2 class="subtitle">My Favorite Trivias</h2>
+            <div class="tile is-ancestor is-12">
 
                 <TriviaBox v-for="trivia in this.trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
 

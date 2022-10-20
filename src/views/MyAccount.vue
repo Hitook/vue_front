@@ -4,16 +4,11 @@
             <div class="column is-12">
                 <h1 class="title">My account</h1>
             </div>
-
-            <div class="column is-12">
-                <button @click="signout()" class="button is-danger">Sign out</button>
-            </div>
-
             <hr>
             <!-- Add check for if staff member -->
             <a href="http://127.0.0.1:8000/admin/auth/user/" class="button">Admin Page</a>
-            <input type="text" class="input" placeholder="Change Username" >
-            <input type="text" class="input" placeholder="Change Password" > 
+            <input type="text" class="input" placeholder="Change Username">
+            <input type="text" class="input" placeholder="Change Password">
             <hr>
             <h2 class="subtitle">My Favorite Trivias</h2>
             <div class="tile is-ancestor is-12">
@@ -46,17 +41,6 @@ export default {
         this.getFavoriteTrivia()
     },
     methods: {
-        signout() {
-            axios.defaults.headers.common["Authorization"] = ""
-
-            localStorage.removeItem("token")
-            localStorage.removeItem("username")
-            localStorage.removeItem("userid")
-
-            this.$store.commit('removeToken')
-
-            this.$router.push('/')
-        },
         async getFavoriteTrivia() {
             this.$store.commit('setIsLoading', true)
 

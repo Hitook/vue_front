@@ -23,8 +23,8 @@
           <div class="navbar-item">
             <div class="account-related">
               <template v-if="$store.state.isAuthenticated">
-                <router-link to="/my-account" class="button is-success">My account</router-link>
-                <router-link to="/sign-out" class="button is-success">Sign out</router-link>
+                <router-link to="/my-account" class="button is-dark is-rounded mx-1">My account</router-link>
+                <button @click="signout()" class="button is-danger is-rounded mx-1">Sign out</button>
               </template>
 
               <template v-else>
@@ -64,18 +64,21 @@ export default {
       }
     }
   },
-  beforeCreate() {
-    this.$store.commit('initializeStore')
-    const token = this.$store.state.token
-
-    if (token) {
-      axios.defaults.headers.common['Authorization'] = "Token " + token
-    } else {
-      axios.defaults.headers.common['Authorization'] = ""
-    }
-  },
   mounted() {
     this.cart = this.$store.state.cart
+  },
+  methods: {
+    signout() {
+      axios.defaults.headers.common["Authorization"] = ""
+
+      localStorage.removeItem("token")
+      localStorage.removeItem("username")
+      localStorage.removeItem("userid")
+
+      this.$store.commit('removeToken')
+
+      this.$router.push('/')
+    },
   },
   computed: {
     isSignedIn() {

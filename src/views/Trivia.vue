@@ -1,6 +1,6 @@
 <template>
   <div class="page-trivia">
-    <div class="columns is-multiline">
+    <div class="columns is-multiline is-centered">
       <div class="column is-9"  v-if="questions.length >0">
         <h1 class="title">{{ trivia.name }}</h1>
         <p>{{ trivia.description}}</p>

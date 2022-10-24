@@ -76,16 +76,18 @@ export default {
         }
 
         await axios
-          .post("/api/v1/token/signin/", formData)
+          .post("/api/v1/token/login/", formData)
           .then(response => {
-            const token = response.data.auth_token
+            const token = response.data.auth_token;
 
-            this.$store.commit('setToken', token)
-            axios.defaults.headers.common["Authorization"] = "Token " + token
-            localStorage.setItem("token", token)
-            const toPath = this.$route.query.to || '/my-account'
+            this.$store.commit('setToken', token);
+            axios.defaults.headers.common["Authorization"] = "Token " + token;
+            localStorage.setItem("token", token);
+            localStorage.setItem("username", formData.username);
+            localStorage.setItem("password", formData.password);
+            const toPath = this.$route.query.to || '/my-account';
 
-            this.$router.push(toPath)
+            this.$router.push(toPath);
           })
           .catch(error => {
             if (error.repsonse) {

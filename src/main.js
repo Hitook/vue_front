@@ -6,4 +6,4 @@ import axios from 'axios'
 
 axios.defaults.baseURL = "http://44.203.134.65"
 
-createApp(App).use(store, VueSession).use(router, axios).mount('#app')
+createApp(App).use(store).use(router, axios).mount('#app')

@@ -11,7 +11,7 @@
 
             <hr>
             <!-- Add check for if staff member -->
-            <a href="http://127.0.0.1:8000/admin/auth/user/" class="button">Admin Page</a>
+            <a href="http://44.203.134.65/admin/auth/user/" class="button">Admin Page</a>
             <input type="text" class="input" placeholder="Change Username">
             <input type="text" class="input" placeholder="Change Password">
             <hr>

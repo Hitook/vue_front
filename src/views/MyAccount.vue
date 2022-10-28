@@ -87,7 +87,7 @@ export default {
         async getFavoriteTrivia() {
             this.$store.commit('setIsLoading', true)
             await axios
-                .get(`/api/v1/favorites/${this.Account.user_id}`)
+                .get(`/api/v1/favorites/${this.Account.user_id}/`)
                 .then(response => {
                     this.favorites = response.data
                     //console.log(this.favorites)
@@ -103,7 +103,7 @@ export default {
         },
         async getTrivia(trivia_id) {
             await axios
-                .get(`/api/v1/trivias/${trivia_id}`)
+                .get(`/api/v1/trivias/${trivia_id}/`)
                 .then(response => {
                   //console.log(response.data[0])
                   this.trivias.push(response.data[0])

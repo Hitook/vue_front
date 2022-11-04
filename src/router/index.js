@@ -9,7 +9,6 @@ import SignIn from '../views/SignIn.vue'
 import SignOut from '../views/SignOut'
 import MyAccount from '../views/MyAccount.vue'
 import CreateTrivia from '../views/CreateTrivia.vue'
-import Question from '../views/Question.vue'
 
 const routes = [
   {
@@ -70,11 +69,6 @@ const routes = [
     path: '/:category_slug/:trivia_slug',
     name: 'Trivia',
     component: Trivia
-  },
-  {
-    path: '/:category_slug/:trivia_slug/:question_id',
-    name: 'Question',
-    component: Question
   },
 ]
 

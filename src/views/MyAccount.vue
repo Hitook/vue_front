@@ -12,9 +12,7 @@
             <hr>
             <h2 class="subtitle">My Favorite Trivias</h2>
             <div class="tile is-ancestor is-12">
-
                 <TriviaBox v-for="trivia in this.trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
-
             </div>
         </div>
     </div>
@@ -37,7 +35,6 @@ export default {
     },
     mounted() {
         document.title = 'My account | Trivia'
-
         this.getFavoriteTrivia()
     },
     methods: {
@@ -48,7 +45,6 @@ export default {
                 .get('/api/v1/latest-trivias/')
                 .then(response => {
                     this.trivias = response.data
-                    console.log(this.trivias[0].id)
                 })
                 .catch(error => {
                     console.log(error)

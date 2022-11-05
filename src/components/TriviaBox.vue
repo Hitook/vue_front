@@ -6,7 +6,8 @@
       </figure>
       <p class="title is-4 has-text-centered">{{ trivia.name}}</p>
     </router-link>
-    <button class="icon-heart" @click="favoriteTrivia"> Favorite</button>
+    <button v-if="favorites"  @click="defavoriteTrivia"> Favorited</button>
+    <button v-else  @click="favoriteTrivia"> Favorite</button>
   </div>
 </template>
  
@@ -27,40 +28,46 @@ export default {
   },
   mounted() {
     document.title = 'My account | Trivia'
-    this.getAccountInfo()
-    setTimeout(() => {
-      //this.favoriteTrivia()
-    }, 1000);
-    
+    this.isFavorite()
+    //this.getAccountInfo()
   },
   methods: {
-    async getAccountInfo() {
-      this.$store.commit('setIsLoading', true)
-      const formData = {
-        username: localStorage.getItem("username"),
-        password: localStorage.getItem("password")
-      }
-      await axios
-        .post("/api/v1/user-info/", formData)
-        .then(response => {
-            this.Account = response.data
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
-      this.$store.commit('setIsLoading', false)
-    },
     async favoriteTrivia() {
       //console.log(this.trivia.category_id)
       var category_id = this.trivia.category_id
       var trivia_id   = this.trivia.id
-      var user_id     = this.Account.user_id
+      var user_id     = localStorage.getItem("user_id")
       await axios
         .post(`/api/v1/favorite/${category_id}/${trivia_id}/${user_id}/`)
         .catch(error => {
             console.log(error)
         })
+      window.location.reload();
+    },
+    async defavoriteTrivia() {
+      var category_id = this.trivia.category_id
+      var trivia_id   = this.trivia.id
+      var user_id     = localStorage.getItem("user_id")
+      await axios
+      .post(`/api/v1/defavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .catch(error => {
+          console.log(error)
+      })
+      window.location.reload();
+    },
+     isFavorite() {
+      var category_id = this.trivia.category_id
+      var trivia_id   = this.trivia.id
+      var user_id     = localStorage.getItem("user_id")
+      axios
+      .get(`/api/v1/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .then(response => {
+        var isfav = response.data
+        this.favorites = (isfav)
+      })
+      .catch(error => {
+        console.log(error)
+      })
     },
   }
 }

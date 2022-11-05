@@ -55,7 +55,6 @@ export default {
         
     },
     methods: {
-
         signout() {
             axios.defaults.headers.common["Authorization"] = ""
 
@@ -67,7 +66,6 @@ export default {
             this.$router.push('/')
         },
         async getAccountInfo() {
-
             this.$store.commit('setIsLoading', true)
             const formData = {
               username: localStorage.getItem("username"),
@@ -90,7 +88,6 @@ export default {
                 .get(`/api/v1/favorites/${this.Account.user_id}/`)
                 .then(response => {
                     this.favorites = response.data
-                    //console.log(this.favorites)
                     for (let i = 0; i < this.favorites.length; i++) {
                       this.getTrivia(this.favorites[i].trivia_id)
                     }

@@ -1,7 +1,7 @@
 <template>
   <div class="column is-3">
-    <div class="tile is-parent">
-      <router-link v-bind:to="trivia.get_absolute_url" class="tile box is-child is-10">
+    <div class="tile is-parent ">
+      <router-link v-bind:to="trivia.get_absolute_url" class="tile box is-child ">
         <figure class="image">
           <img class="is-rounded" src="../../public/quiz-banners/default-banner-medium.jpg">
         </figure>

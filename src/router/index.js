@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import Trivia from '../views/Trivia.vue'
+import TriviaView from '../views/TriviaView.vue'
 import Category from '../views/Category.vue'
 import Categories from '../views/Categories.vue'
 import Search from '../views/Search.vue'
@@ -68,7 +68,7 @@ const routes = [
   {
     path: '/:category_slug/:trivia_slug',
     name: 'Trivia',
-    component: Trivia
+    component: TriviaView
   },
 ]
 

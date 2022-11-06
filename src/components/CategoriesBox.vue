@@ -50,18 +50,21 @@ export default {
       window.location.reload();
     },
      isFavorite() {
-      var category_id = this.category.id
-      var user_id     = localStorage.getItem("user_id")
-      axios
-      .get(`/api/v1/category/isfavorite/${category_id}/${user_id}/`)
-      .then(response => {
-        var isfav = response.data
-        this.favorites = (isfav)
-        console.log(isfav)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      if (localStorage.getItem("user_id") != null){
+        var category_id = this.category.id
+        var user_id     = localStorage.getItem("user_id")
+        axios
+        .get(`/api/v1/category/isfavorite/${category_id}/${user_id}/`)
+        .then(response => {
+          var isfav = response.data
+          this.favorites = (isfav)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      } else {
+        this.favorites = false
+      }
     },
   }
 }

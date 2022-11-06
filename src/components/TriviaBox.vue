@@ -60,18 +60,22 @@ export default {
       window.location.reload();
     },
      isFavorite() {
-      var category_id = this.trivia.category_id
-      var trivia_id   = this.trivia.id
-      var user_id     = localStorage.getItem("user_id")
-      axios
-      .get(`/api/v1/trivia/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
-      .then(response => {
-        var isfav = response.data
-        this.favorites = (isfav)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      if (localStorage.getItem("user_id") != null){
+        var category_id = this.trivia.category_id
+        var trivia_id   = this.trivia.id
+        var user_id     = localStorage.getItem("user_id")
+        axios
+        .get(`/api/v1/trivia/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
+        .then(response => {
+          var isfav = response.data
+          this.favorites = (isfav)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      } else {
+        this.favorites = false
+      }
     },
   }
 }

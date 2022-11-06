@@ -2,9 +2,9 @@
   <div class="container">
     <div class="columns is-multiline">
       <div class="column is-12">
-        <h2 class="is-size-2 has-text-centered mt-4">
+        <h1 class="is-size-2 has-text-centered mt-4">
           Categories
-        </h2>
+        </h1>
       </div>
       <Categories v-for="category in categories" v-bind:key="category.id" v-bind:category="category" />
     </div>

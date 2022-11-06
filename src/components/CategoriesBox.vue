@@ -1,13 +1,12 @@
 <template>
-  <div class="column is-3">
-         <div class="box">
-           <h3 class="is-size-4">{{ category.name}} </h3>
-           <router-link v-bind:to="category.get_absolute_url" class="button is-dark mt-4">  Trivias</router-link>
-           <button class="button is-warning" v-if="favorites"  @click="defavoriteCategory"> Favorited</button>
-           <button class="button is-light" v-else  @click="favoriteCategory"> Favorite</button>
-         </div>
-       </div>
- </template>
+  <div class="column is-4">
+    <router-link v-bind:to="category.get_absolute_url" class="box title has-text-centered is-dark is-2 my-2 py-6">
+      {{ category.name }}
+    </router-link>
+  </div>
+  <button class="button is-warning" v-if="favorites"  @click="defavoriteCategory"> Favorited</button>
+  <button class="button is-light" v-else  @click="favoriteCategory"> Favorite</button>
+</template>
  
  <script>
 import axios from 'axios'
@@ -67,12 +66,3 @@ export default {
   }
 }
   </script>
- 
- <script>
-
-   
- </script>
- 
- <style scoped>
-  
- </style>

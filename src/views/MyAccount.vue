@@ -2,7 +2,7 @@
     <div class="page-my-account">
         <div class="columns is-multiline">
             <div class="column is-12">
-              <h1 class="title">Welcome {{Account.username}}</h1>
+                <h1 class="title">Welcome {{ Account.username }}</h1>
             </div>
 
 
@@ -57,7 +57,7 @@ export default {
           this.getFavoriteCategory()
           this.getFavoriteTrivia()
         }, 1000);
-        
+
     },
     methods: {
         signout() {
@@ -73,17 +73,17 @@ export default {
         async getAccountInfo() {
             this.$store.commit('setIsLoading', true)
             const formData = {
-              username: localStorage.getItem("username"),
-              password: localStorage.getItem("password")
+                username: localStorage.getItem("username"),
+                password: localStorage.getItem("password")
             }
             await axios
-              .post("/api/v1/user-info/", formData)
-              .then(response => {
-                  this.Account = response.data
-              })
-              .catch(error => {
-                  console.log(error)
-              })
+                .post("/api/v1/user-info/", formData)
+                .then(response => {
+                    this.Account = response.data
+                })
+                .catch(error => {
+                    console.log(error)
+                })
 
             this.$store.commit('setIsLoading', false)
         },
@@ -94,7 +94,7 @@ export default {
                 .then(response => {
                     this.favorites = response.data
                     for (let i = 0; i < this.favorites.length; i++) {
-                      this.getTrivia(this.favorites[i].trivia_id)
+                        this.getTrivia(this.favorites[i].trivia_id)
                     }
                 })
                 .catch(error => {
@@ -107,8 +107,8 @@ export default {
             await axios
                 .get(`/api/v1/trivias/${trivia_id}/`)
                 .then(response => {
-                  //console.log(response.data[0])
-                  this.trivias.push(response.data[0])
+                    //console.log(response.data[0])
+                    this.trivias.push(response.data[0])
                 })
                 .catch(error => {
                     console.log(error)

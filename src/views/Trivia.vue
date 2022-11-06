@@ -1,3 +1,4 @@
+
 <template>
   <div class="page-trivia">
     <div class="columns is-multiline is-centered">

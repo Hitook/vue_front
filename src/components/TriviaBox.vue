@@ -9,6 +9,8 @@
           {{ trivia.name }}
         </p>
       </router-link>
+      <button class="button is-warning" v-if="favorites"  @click="defavoriteTrivia"> Favorited</button>
+      <button class="button is-light" v-else  @click="favoriteTrivia"> Favorite</button>
     </div>
   </div>
 </template>

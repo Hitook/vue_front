@@ -6,8 +6,8 @@
       </figure>
       <p class="title is-4 has-text-centered">{{ trivia.name}}</p>
     </router-link>
-    <button v-if="favorites"  @click="defavoriteTrivia"> Favorited</button>
-    <button v-else  @click="favoriteTrivia"> Favorite</button>
+    <button class="button is-warning" v-if="favorites"  @click="defavoriteTrivia"> Favorited</button>
+    <button class="button is-light" v-else  @click="favoriteTrivia"> Favorite</button>
   </div>
 </template>
  
@@ -38,7 +38,7 @@ export default {
       var trivia_id   = this.trivia.id
       var user_id     = localStorage.getItem("user_id")
       await axios
-        .post(`/api/v1/favorite/${category_id}/${trivia_id}/${user_id}/`)
+        .post(`/api/v1/trivia/favorite/${category_id}/${trivia_id}/${user_id}/`)
         .catch(error => {
             console.log(error)
         })
@@ -49,7 +49,7 @@ export default {
       var trivia_id   = this.trivia.id
       var user_id     = localStorage.getItem("user_id")
       await axios
-      .post(`/api/v1/defavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .post(`/api/v1/trivia/defavorite/${category_id}/${trivia_id}/${user_id}/`)
       .catch(error => {
           console.log(error)
       })
@@ -60,7 +60,7 @@ export default {
       var trivia_id   = this.trivia.id
       var user_id     = localStorage.getItem("user_id")
       axios
-      .get(`/api/v1/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .get(`/api/v1/trivia/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
       .then(response => {
         var isfav = response.data
         this.favorites = (isfav)

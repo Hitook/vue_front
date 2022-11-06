@@ -1,40 +1,43 @@
 <template>
-  <h1 class="title is-1 has-text-centered mb-6">Here's an example question?</h1>
-  <div class="container has-text-centered px-6">
-    <div class="container px-6 mx-6">
-
-      <div class="box is-justify-content-center mx-6">
-        <button class="button subtitle is-fullwidth mx-1">
-          <a>Possible Answer 1</a>
-        </button>
-        <button class="button subtitle is-fullwidth mx-1">
-          <a>Possible Answer 2</a>
-        </button>
-        <button class="button subtitle is-fullwidth mx-1">
-          <a>Possible Answer 3</a>
-        </button>
-        <button class="button subtitle is-fullwidth mx-1">
-          <a>Possible Answer 4</a>
-        </button>
+  <div class="container px-6">
+    <div class="container px-6">
+      <h1 class="title is-3 has-text-centered mb-6">{{ question }}</h1>
+    </div>
+    <div class="container has-text-centered px-6">
+      <div class="container px-6 mx-6">
+        <div class="box is-justify-content-center mx-6">
+          <button v-for="answer in answers" class="button subtitle is-fullwidth is-light mx-1">
+            <a>{{ answer }}</a>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
 </template>
- 
-<script>
 
+<script>
 export default {
   name: 'Question',
   props: {
-
+    question: '',
+    correctAnswer: '',
+    fakeAnswer: '',
   },
   data() {
     return {
       picked: '',
       q: 1,
+      answers: [],
     }
   },
+  mounted() {
+    this.getAnswers()
+  },
+  methods: {
+    getAnswers() {
+      this.answers = [this.correctAnswer, this.fakeAnswer]
+    }
+  }
 }
 
 </script>

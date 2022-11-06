@@ -2,8 +2,8 @@
   <section class="section">
     <div class="columns">
       <div class="column">
-        <h1 class="title has-text-left">{{ trivia.name }}</h1>
-        <h2 class="subtitle">{{ trivia.description }}</h2>
+        <h1 class="title has-text-left">{{ triviaData.name }}</h1>
+        <h2 class="subtitle is-6">{{ triviaData.description }}</h2>
       </div>
       <div class="column">
         <h1 class="title has-text-right"> Current Score: {{ total }}</h1>
@@ -11,7 +11,11 @@
     </div>
   </section>
   <section class="section">
-    <Question />
+    <Question :question="currentQuestionData.question" :correctAnswer="currentQuestionData.correct_answer"
+      :fakeAnswer="currentQuestionData.fake_answer" :key="currentQuestion" />
+    <div class="container has-text-centered mt-4">
+      <button @click="getNextQuestion" class="button">Next</button>
+    </div>
   </section>
 </template>
 
@@ -22,10 +26,10 @@ export default {
   name: 'Trivia',
   data() {
     return {
-      trivia: {},
-      questions: {},
+      triviaData: {},
+      currentQuestionData: {},
       answer: {},
-      currQuestion: 0,
+      currentQuestion: 0,
       total: 0,
     }
   },
@@ -34,8 +38,12 @@ export default {
   },
   mounted() {
     this.getTrivia()
+    this.getNextQuestion()
   },
   methods: {
+    forceRerender() {
+      this.currentQuestion += 1
+    },
     onSubmit(e) {
       this.total = 0;
       const form = e.target
@@ -75,24 +83,33 @@ export default {
       await axios
         .get(`api/v1/trivias/${category_slug}/${trivia_slug}`)
         .then(response => {
-          this.trivia = response.data
-          document.title = this.trivia.name + ' | Trivia'
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      axios
-        .get(`api/v1/${trivia_slug}/questions`)
-        .then(response => {
-          this.questions = response.data
-          console.log(response.data)
+          this.triviaData = response.data
+          document.title = this.triviaData.name + ' | Trivia'
         })
         .catch(error => {
           console.log(error)
         })
       this.$store.commit('setIsLoading', false)
     },
+    async getNextQuestion() {
+      this.$store.commit('setIsLoading', true)
+      const trivia_slug = this.$route.params.trivia_slug
+
+      axios
+        .get(`api/v1/${trivia_slug}/questions`)
+        .then(response => {
+          if (this.currentQuestion >= response.data.length) {
+            console.log(this.currentQuestion)
+          } else {
+            this.currentQuestionData = response.data[this.currentQuestion]
+            this.forceRerender()
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      this.$store.commit('setIsLoading', false)
+    }
   },
 }
 </script>

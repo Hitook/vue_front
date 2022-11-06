@@ -85,6 +85,11 @@ export default {
             localStorage.setItem("token", token);
             localStorage.setItem("username", formData.username);
             localStorage.setItem("password", formData.password);
+            axios.post("/api/v1/user-info/", formData)
+            .then(response => {
+              var account = response.data
+              localStorage.setItem("user_id", account.user_id);
+            })
             const toPath = this.$route.query.to || '/my-account';
 
             this.$router.push(toPath);

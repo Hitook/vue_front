@@ -9,19 +9,73 @@
           {{ trivia.name }}
         </p>
       </router-link>
+      <button class="button is-warning" v-if="favorites"  @click="defavoriteTrivia"> Favorited</button>
+      <button class="button is-light" v-else  @click="favoriteTrivia"> Favorite</button>
     </div>
   </div>
 </template>
  
 <script>
+import axios from 'axios'
+
 export default {
   name: 'TriviaBox',
   props: {
     trivia: Object
+  },
+  data() {
+    return {
+      trivias: [],
+      Account: {},
+      favorites: {},
+    }
+  },
+  mounted() {
+    document.title = 'My account | Trivia'
+    this.isFavorite()
+    //this.getAccountInfo()
+  },
+  methods: {
+    async favoriteTrivia() {
+      //console.log(this.trivia.category_id)
+      var category_id = this.trivia.category_id
+      var trivia_id   = this.trivia.id
+      var user_id     = localStorage.getItem("user_id")
+      await axios
+        .post(`/api/v1/trivia/favorite/${category_id}/${trivia_id}/${user_id}/`)
+        .catch(error => {
+            console.log(error)
+        })
+      window.location.reload();
+    },
+    async defavoriteTrivia() {
+      var category_id = this.trivia.category_id
+      var trivia_id   = this.trivia.id
+      var user_id     = localStorage.getItem("user_id")
+      await axios
+      .post(`/api/v1/trivia/defavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .catch(error => {
+          console.log(error)
+      })
+      window.location.reload();
+    },
+     isFavorite() {
+      var category_id = this.trivia.category_id
+      var trivia_id   = this.trivia.id
+      var user_id     = localStorage.getItem("user_id")
+      axios
+      .get(`/api/v1/trivia/isfavorite/${category_id}/${trivia_id}/${user_id}/`)
+      .then(response => {
+        var isfav = response.data
+        this.favorites = (isfav)
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
   }
 }
-
-</script>
+  </script>
  
 <style scoped>
 

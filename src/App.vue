@@ -85,7 +85,7 @@ export default {
         return true
       }else {
         return false
-      }
+    },
   },
   computed: {
     isSignedIn() {

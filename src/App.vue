@@ -22,7 +22,7 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <div class="account-related">
-              <template v-if="loggedin()">
+              <template v-if="isloggedin()">
                 <router-link to="/my-account" class="button is-dark is-rounded mx-1">My account</router-link>
                 <button @click="signout()" class="button is-danger is-rounded mx-1">Sign out</button>
               </template>
@@ -81,7 +81,7 @@ export default {
       this.$router.push('/')
     },
   },
-  loggedin() {
+  isloggedin() {
     if (localStorage.getItem("user_id") != null) {
       return true
     }else {
@@ -92,7 +92,6 @@ export default {
     isSignedIn() {
       const token = this.$store.state.token
       if (token) {
-        console.log('false')
         return false
       } else {
         return true

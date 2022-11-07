@@ -1,3 +1,4 @@
+
 <template>
   <div class="page-trivia">
     <div class="columns is-multiline is-centered">
@@ -52,12 +53,12 @@
           this.checkAnswer(inputName, value)
         }
       },
-      async checkAnswer(inputName, value) {
+      checkAnswer(inputName, value) {
         this.$store.commit('setIsLoading', true)
         const question_id = inputName
         const trivia_slug  = this.$route.params.trivia_slug
 
-        await axios
+        axios
         .get(`api/v1/${trivia_slug}/questions`)
         .then(response => {
           this.trivia = response.data
@@ -72,6 +73,8 @@
         .catch(error => {
           console.log(error)
         })
+
+        this.submitTrivia()
         this.$store.commit('setIsLoading', false)
       },
       async getTrivia() {
@@ -98,6 +101,17 @@
             console.log(error)
           })
         this.$store.commit('setIsLoading', false)
+      },
+      submitTrivia() {
+        var score = this.total
+        axios 
+          .get(`api/v1/${trivia_slug}/questions`)
+          .then(response => {
+            this.questions = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
       },
     },
   }

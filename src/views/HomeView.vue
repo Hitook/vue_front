@@ -77,47 +77,8 @@
 
   <section class="m-6 p-6">
     <h2 class="title is-2 has-text-centered">Browse by Category</h2>
-    <div class="tile is-ancestor m-6">
-      <div class="tile is-parent is-vertical m-6">
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/music-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Music</p>
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/art-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Art</p>
-      </div>
-      <div class="tile is-vertical m-6">
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/business-tech-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Technology</p>
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/cars-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Cars</p>
-      </div>
-      <div class="tile is-vertical m-6">
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/general-knowledge-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">General Knowledge</p>
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/geography-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Geography</p>
-      </div>
-      <div class="tile is-vertical m-6">
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/history-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">History</p>
-        <figure class="image is-16by16">
-          <img class="is-rounded" src="../../public/quiz-banners/literature-banner-medium.jpg">
-        </figure>
-        <p class="title is-4 has-text-centered">Literature</p>
-      </div>
+    <div class="columns is-multiline">
+      <Categories v-for="category in categories" v-bind:key="category.id" v-bind:category="category" />
     </div>
   </section>
 </template>
@@ -128,18 +89,22 @@
 import axios from 'axios'
 
 import TriviaBox from '@/components/TriviaBox'
+import Categories from '@/components/CategoriesBox.vue'
 export default {
   name: 'HomeView',
   data() {
     return {
-      latestTrivias: []
+      latestTrivias: [],
+      categories: [],
     }
   },
   components: {
-    TriviaBox
+    TriviaBox,
+    Categories
   },
   mounted() {
     this.getLatestTrivias()
+    this.getCategories()
     document.title = 'Home | Trivia'
   },
   methods: {
@@ -152,6 +117,32 @@ export default {
         .catch(error => {
           console.log(error)
         })
+    },
+    async getCategories() {
+
+      this.$store.commit('setIsLoading', true)
+
+      axios
+        .get(`api/v1/trivias/display-categories/`)
+        .then(response => {
+          this.categories = response.data
+          document.title = 'Categories | Trivia'
+        })
+        .catch(error => {
+          console.log(error)
+
+          toast({
+            message: 'Something went wrong. Please try again.',
+            type: 'is-danger',
+            dismissible: true,
+            pauseOnHover: true,
+            duration: 2000,
+            position: 'bottom-right',
+          })
+        })
+
+      this.$store.commit('setIsLoading', false)
+
     }
   }
 }

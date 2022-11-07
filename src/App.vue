@@ -10,7 +10,7 @@
           <span aria-hidden="true"></span>
         </a>
       </div>
-      <div class="navbar-menu" id="navbar-menu" v-bind:class="{'is-active': showMobileMenu }">
+      <div class="navbar-menu" id="navbar-menu" v-bind:class="{ 'is-active': showMobileMenu }">
         <div class="navbar-start">
           <router-link to="/categories" class="navbar-item">Categories</router-link>
           <router-link to="/about" class="navbar-item">About Us</router-link>
@@ -37,7 +37,7 @@
       </div>
     </nav>
 
-    <div class="is-loading-bar has-text-centered" v-bind:class="{'is-loading': $store.state.isLoading }">
+    <div class="is-loading-bar has-text-centered" v-bind:class="{ 'is-loading': $store.state.isLoading }">
       <div class="lds-dual-ring"></div>
     </div>
 
@@ -45,7 +45,7 @@
       <router-view />
     </body>
 
-    <footer class="footer">
+    <footer class="footer p-4">
       <p class="has-text-centered">Copyright (c) 2022</p>
     </footer>
 
@@ -73,7 +73,8 @@ export default {
 
       localStorage.removeItem("token")
       localStorage.removeItem("username")
-      localStorage.removeItem("userid")
+      localStorage.removeItem("user_id")
+      localStorage.removeItem("password")
 
       this.$store.commit('removeToken')
 

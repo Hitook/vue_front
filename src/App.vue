@@ -80,13 +80,12 @@ export default {
 
       this.$router.push('/')
     },
-  },
-  isloggedin() {
-    if (localStorage.getItem("user_id") != null) {
-      return true
-    }else {
-      return false
-    }
+    isloggedin() {
+      if (localStorage.getItem("user_id") != null) {
+        return true
+      }else {
+        return false
+      }
   },
   computed: {
     isSignedIn() {

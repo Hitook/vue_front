@@ -32,32 +32,30 @@
     <div class="columns">
       <div class="column">
         <div class="card ml-6">
-          <header class="card-header subtitle is-4 p-2">Explore or Create</header>
+          <header class="card-header subtitle is-4 p-2">Create an Account</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Choose from dozens of pre-made trivia questions or create your own using your own custom questions with
-              just a few a few clicks.
+              Create an account to save your favorite categories and trivias or to create your own
             </p>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="card">
-          <header class="card-header subtitle is-4 p-2">Play and Compete</header>
+          <header class="card-header subtitle is-4 p-2">Explore or Create</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Enjoy a fun and intuitive gameplay experience accessible via any device, complete with leaderboards and
-              fun gamification.
+              Choose from dozens of pre-made trivia questions or create a new trivia or edit an existing one
             </p>
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="card mr-6">
-          <header class="card-header subtitle is-4 p-2">Create an Account</header>
+      <div class="column mr-6">
+        <div class="card">
+          <header class="card-header subtitle is-4 p-2">Play and Score</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Create an account to save your favorite categories and trivias or to create your own!
+              Challenge yourself by playing a trivia. See if you can beat your own highest score!
             </p>
           </div>
         </div>

@@ -6,8 +6,6 @@
       <div class="columns is-multiline">
         <TriviaBox v-for="trivia in  trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
       </div>
-      <div class="tile is-ancestor is-6">
-      </div>
     </div>
   </section>
 </template>

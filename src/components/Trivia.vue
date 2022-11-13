@@ -22,8 +22,15 @@
     </div>
   </section>
   <section class="section" v-else>
-    <h1 class="title has-text-centered is-1 m-6">You completed the trivia!</h1>
-    <h2 class="subtitle has-text-centered is-2 m-6">Your final score is: {{ score }}</h2>
+    <div class="columns is-multiline">
+      <div class="column is-12">
+        <h1 class="title has-text-centered is-1 m-6">You completed the trivia!</h1>
+        <h2 class="subtitle has-text-centered is-2 mt-6">Your final score is: {{ score }}</h2>
+      </div>
+      <div class="column has-text-centered is-12">
+        <button @click="restartTrivia" class="button subtitle is-primary is-4">Play Again</button>
+      </div>
+    </div>
   </section>
 </template>
 
@@ -49,12 +56,15 @@ export default {
     }
   },
   mounted() {
-    if( localStorage.getItem("user_id") != null){
+    if (localStorage.getItem("user_id") != null) {
       this.getUserScore()
     }
     this.getQuestion()
   },
   methods: {
+    restartTrivia() {
+      window.location.reload();
+    },
     // Create and shuffle answers array
     shuffleAnswers() {
       for (let i = this.answers.length - 1; i > 0; i--) {
@@ -106,7 +116,7 @@ export default {
     },
     async getUserScore() {
       const trivia_slug = this.$route.params.trivia_slug
-      const user_id     = localStorage.getItem("user_id")
+      const user_id = localStorage.getItem("user_id")
       axios
         .get(`api/v1/score/${trivia_slug}/${user_id}/`)
         .then(response => {
@@ -119,7 +129,7 @@ export default {
     },
     async SubmitTriva() {
       const trivia_slug = this.$route.params.trivia_slug
-      const user_id     = localStorage.getItem("user_id")
+      const user_id = localStorage.getItem("user_id")
       axios
         .post(`api/v1/trivia/${trivia_slug}/${user_id}/${this.score}/`)
     }

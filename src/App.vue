@@ -84,6 +84,16 @@ export default {
       } else {
         return false
       }
+    }
+  },
+  computed: {
+    isSignedIn() {
+      const token = this.$store.state.token
+      if (token) {
+        return false
+      } else {
+        return false
+      }
     },
     computed: {
       isSignedIn() {

@@ -26,39 +26,36 @@
     </div>
   </section>
 
-  <section class="p-6">
-    <h2 class="title is-2 has-text-centered">How It Works</h2>
+  <section class="m-6 p-6">
+    <h2 class="title is-2 has-text-centered mb-6">How It Works</h2>
 
     <div class="columns">
       <div class="column">
         <div class="card ml-6">
-          <header class="card-header subtitle is-3 p-2">Explore or Create</header>
+          <header class="card-header subtitle is-4 p-2">Create an Account</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Choose from thousands of pre-made trivia questions or create your own using your own custom questions with
-              just a few a few clicks.
+              Create an account to save your favorite categories and trivias or to create your own
             </p>
           </div>
         </div>
       </div>
       <div class="column">
         <div class="card">
-          <header class="card-header subtitle is-3 p-2">Play and Compete</header>
+          <header class="card-header subtitle is-4 p-2">Explore or Create</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Enjoy a fun and intuitive gameplay experience accessible via any device, complete with leaderboards and
-              fun
-              gamification.
+              Choose from dozens of pre-made trivia questions or create a new trivia or edit an existing one
             </p>
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="card mr-6">
-          <header class="card-header subtitle is-3 p-2">Host or Share</header>
+      <div class="column mr-6">
+        <div class="card">
+          <header class="card-header subtitle is-4 p-2">Play and Score</header>
           <div class="card-content">
             <p class="subtitle is-5">
-              Easily host multiplayer live trivia games by sharing a unique room URL or game code.
+              Challenge yourself by playing a trivia. See if you can beat your own highest score!
             </p>
           </div>
         </div>
@@ -69,14 +66,14 @@
   </section>
 
   <section class="m-6 p-6">
-    <h2 class="title is-2 has-text-centered">Popular Trivia</h2>
-    <div class="tile is-ancestor m-6">
+    <h2 class="title is-2 has-text-centered mb-6">Popular Trivia</h2>
+    <div class="tile is-ancestor mx-6">
       <TriviaBox v-for="trivia in latestTrivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
     </div>
   </section>
 
   <section class="m-6 p-6">
-    <h2 class="title is-2 has-text-centered">Browse by Category</h2>
+    <h2 class="title is-2 has-text-centered mb-6">Browse by Category</h2>
     <div class="columns is-multiline">
       <Categories v-for="category in categories" v-bind:key="category.id" v-bind:category="category" />
     </div>

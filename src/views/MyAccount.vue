@@ -1,28 +1,32 @@
 <template>
-    <div class="page-my-account">
+    <div class="section">
         <div class="columns is-multiline">
-            <div class="column is-12">
-                <h1 class="title">Welcome {{ Account.username }}</h1>
+            <div class="column is-12 has-text-centered">
+                <h1 class="title is-2 m-4">Welcome {{ Account.username }}</h1>
             </div>
-
-
-
-
-
-            <hr>
-            <!-- Add check for if staff member -->
-            <a href="http://44.203.134.65/admin/auth/user/" class="button">Admin Page</a>
-            <input type="text" class="input" placeholder="Change Username">
-            <input type="text" class="input" placeholder="Change Password">
-            <hr>
-
-            <h2 class="subtitle">My Favorite Trivias</h2>
-            <div class="tile is-ancestor is-12">
-                <TriviaBox v-if="this.trivias.length > 0" v-for="trivia in this.trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
+            <div class="column is-12 has-text-centered">
+                <a href="http://44.203.134.65/admin/auth/user/" class="button subtitle">Admin Page</a>
             </div>
-            <h2 class="subtitle">My Categories Trivias</h2>
-            <div class="tile is-ancestor is-12">
-                <CategoryBox v-if="this.categories.length > 0" v-for="category in this.categories" v-bind:key="category.id" v-bind:category="category" />
+        </div>
+        <div class="section">
+            <h2 class="title">My Favorite Trivias:</h2>
+            <div class="block px-6 mx-6">
+                <div v-if="this.trivias.length > 0" class="columns is-multiline">
+                    <TriviaBox v-for="trivia in this.trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
+                </div>
+                <div v-else>
+                    <h2 class="subtitle">Looks like you haven't favorited any trivias...</h2>
+                </div>
+            </div>
+            <h2 class="title">My Favorite Categories:</h2>
+            <div class="block px-6 mx-6">
+                <div v-if="this.categories.length > 0" class="columns is-multiline">
+                    <CategoryBox v-for="category in this.categories" v-bind:key="category.id"
+                        v-bind:category="category" />
+                </div>
+                <div v-else>
+                    <h2 class="subtitle">Looks like you haven't favorited any categories...</h2>
+                </div>
             </div>
         </div>
     </div>
@@ -54,8 +58,8 @@ export default {
         document.title = 'My account | Trivia'
         this.getAccountInfo()
         setTimeout(() => {
-          this.getFavoriteCategory()
-          this.getFavoriteTrivia()
+            this.getFavoriteCategory()
+            this.getFavoriteTrivia()
         }, 1000);
 
     },
@@ -122,7 +126,7 @@ export default {
                 .then(response => {
                     this.favorites = response.data
                     for (let i = 0; i < this.favorites.length; i++) {
-                      this.getCategory(this.favorites[i].category_id)
+                        this.getCategory(this.favorites[i].category_id)
                     }
                 })
                 .catch(error => {
@@ -135,7 +139,7 @@ export default {
             await axios
                 .get(`/api/v1/category/${category_id}/`)
                 .then(response => {
-                  this.categories.push(response.data[0])
+                    this.categories.push(response.data[0])
                 })
                 .catch(error => {
                     console.log(error)

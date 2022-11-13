@@ -6,6 +6,7 @@
         <h2 class="subtitle is-6">{{ triviaDescription }}</h2>
       </div>
       <div class="column">
+        <h1 class="title has-text-right"> Highest Score: {{ userScore }}</h1>
         <h1 class="title has-text-right"> Current Score: {{ score }}</h1>
       </div>
     </div>
@@ -54,9 +55,13 @@ export default {
       correctAnswer: '',
       score: 0,
       triviaComplete: false,
+      userScore: 0,
     }
   },
   mounted() {
+    if( localStorage.getItem("user_id") != null){
+      this.getUserScore()
+    }
     this.getQuestion()
   },
   methods: {
@@ -78,6 +83,9 @@ export default {
 
       if (this.questionIndx + 1 == this.totalQuestions){
         this.triviaComplete = true
+        if (this.userScore < this.score) {
+          this.SubmitTriva()
+        }
       } else {
         this.questionIndx += 1
         this.getQuestion()
@@ -106,6 +114,25 @@ export default {
         })
       this.$store.commit('setIsLoading', false)
     },
+    async getUserScore() {
+      const trivia_slug = this.$route.params.trivia_slug
+      const user_id     = localStorage.getItem("user_id")
+      axios
+        .get(`api/v1/score/${trivia_slug}/${user_id}/`)
+        .then(response => {
+          response = response.data
+          console.log(response[0].score)
+          if (response[0].score) {
+            this.userScore = response[0].score
+          }
+        })
+    },
+    async SubmitTriva() {
+      const trivia_slug = this.$route.params.trivia_slug
+      const user_id     = localStorage.getItem("user_id")
+      axios
+        .post(`api/v1/trivia/${trivia_slug}/${user_id}/${this.score}/`)
+    }
   }
 }
 

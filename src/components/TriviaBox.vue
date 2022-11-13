@@ -7,7 +7,7 @@
       <p class="title is-4 has-text-centered mt-4">
         {{ trivia.name }}
       </p>
-      <div class="has-text-right">
+      <div v-if="signedIn" class="has-text-right">
         <button class="button is-warning" v-if="favorites" @click.prevent="defavoriteTrivia"> Favorited</button>
         <button class="button is-light" v-else @click.prevent="favoriteTrivia"> Favorite</button>
       </div>
@@ -28,16 +28,18 @@ export default {
       trivias: [],
       Account: {},
       favorites: {},
+      signedIn: false,
     }
   },
   mounted() {
     document.title = 'My account | Trivia'
     this.isFavorite()
-    //this.getAccountInfo()
+    if (localStorage.getItem("user_id") != null) {
+      this.signedIn = true
+    }
   },
   methods: {
     async favoriteTrivia() {
-      //console.log(this.trivia.category_id)
       var category_id = this.trivia.category_id
       var trivia_id = this.trivia.id
       var user_id = localStorage.getItem("user_id")

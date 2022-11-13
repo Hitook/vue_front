@@ -2,7 +2,7 @@
   <div class="column is-4">
     <router-link v-bind:to="category.get_absolute_url" class="box has-text-centered is-2 my-2">
       <h1 class="title is-dark">{{ category.name }}</h1>
-      <div class="has-text-right">
+      <div v-if="signedIn" class="has-text-right">
         <button class="button is-warning" v-if="favorites" @click.prevent="defavoriteCategory">Favorited</button>
         <button class="button is-light" v-else @click.prevent="favoriteCategory">Favorite</button>
       </div>
@@ -22,16 +22,18 @@ export default {
       trivias: [],
       Account: {},
       favorites: {},
+      signedIn: false,
     }
   },
   mounted() {
     document.title = 'My account | Trivia'
     this.isFavorite()
-    //this.getAccountInfo()
+    if (localStorage.getItem("user_id") != null) {
+      this.signedIn = true
+    }
   },
   methods: {
     async favoriteCategory() {
-      //console.log(this.trivia.category_id)
       var category_id = this.category.id
       var user_id = localStorage.getItem("user_id")
       await axios

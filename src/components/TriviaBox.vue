@@ -8,8 +8,8 @@
         {{ trivia.name }}
       </p>
       <div v-if="signedIn" class="has-text-right">
-        <button class="button is-warning" v-if="favorites" @click.prevent="defavoriteTrivia"> Favorited</button>
-        <button class="button is-light" v-else @click.prevent="favoriteTrivia"> Favorite</button>
+        <button class="button is-light" v-if="!favorites" @click.prevent="favoriteTrivia">Favorite</button>
+        <button class="button is-warning" v-else @click.prevent="defavoriteTrivia">Favorited</button>
       </div>
     </router-link>
   </div>

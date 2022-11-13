@@ -83,19 +83,19 @@ export default {
     isloggedin() {
       if (localStorage.getItem("user_id") != null) {
         return true
-      }else {
-        return false
-    },
-  },
-  computed: {
-    isSignedIn() {
-      const token = this.$store.state.token
-      if (token) {
-        return false
       } else {
-        return true
+        return false
       }
-
+    },
+    computed: {
+      isSignedIn() {
+        const token = this.$store.state.token
+        if (token) {
+          return false
+        } else {
+          return true
+        }
+      }
     }
   }
 }

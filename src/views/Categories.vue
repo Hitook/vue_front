@@ -1,11 +1,7 @@
 <template>
   <div class="container">
+    <h1 class="is-size-2 has-text-centered my-6">Categories</h1>
     <div class="columns is-multiline">
-      <div class="column is-12">
-        <h1 class="is-size-2 has-text-centered mt-4">
-          Categories
-        </h1>
-      </div>
       <Categories v-for="category in categories" v-bind:key="category.id" v-bind:category="category" />
     </div>
   </div>

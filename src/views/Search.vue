@@ -1,9 +1,13 @@
 <template>
   <section>
-    <h1 class="title">Search</h1>
-    <h2 class="is-size-5 has-text-grey">Search term: "{{query}}"</h2>
-    <div class="tile is-ancestor is-6">
-      <TriviaBox v-for="trivia in  trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
+    <div class="container">
+      <h1 class="title mt-6">Search Results</h1>
+      <h2 class="subtitle is-size-5 has-text-grey">Search term: "{{ query }}"</h2>
+      <div class="columns is-multiline">
+        <TriviaBox v-for="trivia in  trivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
+      </div>
+      <div class="tile is-ancestor is-6">
+      </div>
     </div>
   </section>
 </template>

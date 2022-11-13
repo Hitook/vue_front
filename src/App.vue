@@ -45,9 +45,7 @@
       <router-view />
     </body>
 
-    <footer class="footer p-4">
-      <p class="has-text-centered">Copyright (c) 2022</p>
-    </footer>
+
 
   </div>
 </template>

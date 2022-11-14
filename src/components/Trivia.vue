@@ -6,7 +6,9 @@
         <h2 class="subtitle is-6">{{ triviaDescription }}</h2>
       </div>
       <div class="column">
-        <h1 class="title has-text-right"> Highest Score: {{ userScore }}</h1>
+        <span v-if="signedIn">
+          <h1 class="title has-text-right"> Highest Score: {{ userScore }}</h1>
+        </span>
         <h1 class="title has-text-right"> Current Score: {{ score }}</h1>
       </div>
     </div>
@@ -57,11 +59,13 @@ export default {
       userScore: 0,
       isDisabled: false,
       newHighScore: false,
+      signedIn: false
     }
   },
   mounted() {
     if (localStorage.getItem("user_id") != null) {
       this.getUserHighScore()
+      this.signedIn = true
     }
     this.getNewQuestion()
   },

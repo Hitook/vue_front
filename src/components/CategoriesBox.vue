@@ -1,7 +1,7 @@
 <template>
   <div class="column is-4">
     <router-link v-bind:to="category.get_absolute_url" class="box has-text-centered is-2 my-2">
-      <h1 class="title is-dark">{{ category.name }}</h1>
+      <h1 class="title is-dark py-4">{{ category.name }}</h1>
       <div v-if="signedIn" class="has-text-right">
         <button class="button is-light" v-if="!favorites" @click.prevent="favoriteCategory">Favorite</button>
         <button class="button is-warning" v-else @click.prevent="defavoriteCategory">Favorited</button>

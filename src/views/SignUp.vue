@@ -1,48 +1,52 @@
 <template>
-  <div class="page-sign-up">
-    <div class="coulmns">
-      <div class="column is-4 is-offset-4">
-        <h1 class="title">Sign up</h1>
+  <section class="section">
+    <div class="page-sign-up">
+      <div class="coulmns">
+        <div class="column is-4 is-offset-4 mt-6">
+          <div class="box mt-6">
+            <h1 class="title has-text-centered is-2">Sign Up</h1>
 
-        <form @submit.prevent="submitForm">
-          <div class="field">
-            <label> Username</label>
-            <div class="control">
-              <input type="text" class="input" v-model="username">
-            </div>
+            <form @submit.prevent="submitForm">
+              <div class="field">
+                <label class="subtitle">Username</label>
+                <div class="control">
+                  <input type="text" class="input" v-model="username">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="subtitle">Password</label>
+                <div class="control">
+                  <input type="password" class="input" v-model="password">
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="subtitle">Repeat Password</label>
+                <div class="control">
+                  <input type="password" class="input" v-model="password2">
+                </div>
+              </div>
+
+              <div class="notification is-danger" v-if="errors.length">
+                <p v-for="error in errors" v-bind:key="error"> {{ error }}</p>
+
+              </div>
+
+              <div class="field">
+                <div class="control">
+                  <button class="button subtitle is-primary is-fullwidth">Sign Up</button>
+                </div>
+              </div>
+              <hr>
+
+              Or <router-link to="/sign-in">click here</router-link> to Sign In
+            </form>
           </div>
-
-          <div class="field">
-            <label> Password</label>
-            <div class="control">
-              <input type="password" class="input" v-model="password">
-            </div>
-          </div>
-
-          <div class="field">
-            <label> Repeat Password</label>
-            <div class="control">
-              <input type="password" class="input" v-model="password2">
-            </div>
-          </div>
-
-          <div class="notification is-danger" v-if="errors.length">
-            <p v-for="error in errors" v-bind:key="error"> {{ error }}</p>
-
-          </div>
-
-          <div class="field">
-            <div class="control">
-              <button class="button is-dark">Sign up</button>
-            </div>
-          </div>
-          <hr>
-
-          Or <router-link to="/sign-in">click here</router-link> to sign in
-        </form>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

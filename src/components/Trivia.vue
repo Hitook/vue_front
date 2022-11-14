@@ -14,9 +14,10 @@
   <section class="section" v-if="!triviaComplete">
     <div class="container">
       <h1 class="title is-3 has-text-centered mb-6">{{ currentQuestion.question }}</h1>
-      <div class="box mx-6">
-        <button v-for="answer in answers" @click="onSubmit" class="button subtitle is-fullwidth mx-1">
-          <a class="is-size-4 has-text-dark">{{ answer }}</a>
+      <div class="box has-background-dark mx-6">
+        <button v-for="answer in answers" @click="onSubmit"
+          class="button subtitle is-fullwidth is-light is-outlined mx-1">
+          <a class="is-size-4">{{ answer }}</a>
         </button>
       </div>
     </div>
@@ -139,5 +140,11 @@ export default {
 </script>
  
 <style scoped>
+button>a {
+  color: hsl(0, 0%, 96%);
+}
 
+button:hover>a {
+  color: hsl(0, 0%, 21%);
+}
 </style>

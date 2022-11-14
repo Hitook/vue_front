@@ -75,7 +75,6 @@ export default {
       localStorage.removeItem("password")
 
       this.$store.commit('removeToken')
-
       this.$router.push('/')
     },
     isloggedin() {
@@ -111,6 +110,15 @@ export default {
 
 <style lang="scss">
 @import '../node_modules/bulma';
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: hsl(0, 0%, 90%);
+}
 
 .lds-dual-ring {
   display: inline-block;

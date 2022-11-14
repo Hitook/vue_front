@@ -66,7 +66,7 @@
   </section>
 
   <section class="m-6 p-6">
-    <h2 class="title is-2 has-text-centered mb-6">Popular Trivia</h2>
+    <h2 class="title is-2 has-text-centered mb-6">Recent Trivia</h2>
     <div class="tile is-ancestor mx-6">
       <TriviaBox v-for="trivia in latestTrivias" v-bind:key="trivia.id" v-bind:trivia="trivia" />
     </div>
